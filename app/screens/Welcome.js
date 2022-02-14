@@ -1,4 +1,5 @@
-import { View, ImageBackground, StyleSheet } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { View, ImageBackground, StyleSheet, Animated } from "react-native";
 
 import colors from "../config/colors";
 
@@ -7,6 +8,25 @@ import { AppImage } from "../components/AppImage";
 import { AppText } from "../components/AppText";
 
 const Welcome = ({ navigation }) => {
+
+    useEffect(() => {
+        fadeIn()
+    })
+
+    const fadeAnim = useRef(new Animated.Value(0)).current;
+
+    
+    const fadeIn = () => {
+
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 4000,
+        useNativeDriver: true,
+      }).start();
+    };
+
+
+
   return (
     <ImageBackground
       blurRadius={12}
@@ -18,7 +38,17 @@ const Welcome = ({ navigation }) => {
           imageStyle={styles.imageLogo}
           imagePath={require("../assets/logo.png")}
         />
-        <AppText style={styles.tagLine}>Welcome to ChatNa</AppText>
+        <Animated.Text
+
+        style={[
+          styles.fadingContainer,
+          {
+            opacity: fadeAnim
+          }
+        ]}
+      >
+        <AppText style={styles.tagLine}>Welcome to ChatNa...</AppText>
+      </Animated.Text>
       </View>
       <View style={styles.buttonContainer}>
         <AppButton
@@ -52,11 +82,12 @@ const styles = StyleSheet.create({
     width: "90%",
   },
 
+
   loginButton: {
     backgroundColor: colors.primary,
   },
   tagLine: {
-    fontSize: 25,
+    fontSize: 30,
     fontWeight: "600",
     paddingVertical: 20,
   },
