@@ -6,7 +6,7 @@ const useFirebase = () => {
   const [phoneNumber, setPhoneNumber] = useState();
   const [verificationCode, setVerificationCode] = useState();
   const [verificationId, setVerificationId] = useState();
-  const [message, showMessage] = useState();
+  const [message, setShowMessage] = useState();
   const recaptchaVerifier = useRef(null);
 
   const confirmVerification = async () => {
@@ -16,9 +16,9 @@ const useFirebase = () => {
         verificationCode
       );
       await signInWithCredential(auth, credential);
-      showMessage({ text: "Phone authentication successful 👍" });
+      setShowMessage({ text: "Phone authentication successful 👍" });
     } catch (err) {
-      showMessage({ text: `Error: ${err.message}`, color: "red" });
+      setShowMessage({ text: `Error: ${err.message}`, color: "red" });
     }
   };
 
@@ -30,11 +30,11 @@ const useFirebase = () => {
         recaptchaVerifier.current
       );
       setVerificationId(verificationId);
-      showMessage({
+      setShowMessage({
         text: "Verification code has been sent to your phone.",
       });
     } catch (err) {
-      showMessage({ text: `Error: ${err.message}`, color: "red" });
+      setShowMessage({ text: `Error: ${err.message}`, color: "red" });
     }
   };
 
@@ -43,7 +43,7 @@ const useFirebase = () => {
     verify,
     setPhoneNumber,
     setVerificationCode,
-    showMessage,
+    setShowMessage,
     phoneNumber,
     verificationCode,
     verificationId,
