@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import colors from './app/config/colors';
-import LoginScreen from './app/screens/LoginScreen'; 
+import LoginScreen from './app/screens/Login'; 
 
 export default function App() {
   return (
