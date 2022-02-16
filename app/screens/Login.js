@@ -59,7 +59,7 @@ export default function LoginScreen() {
             StyleSheet.absoluteFill,
             { backgroundColor: 0xffffffee, justifyContent: "center" },
           ]}
-          onPress={() => authByPhone.showMessage(undefined)}
+          onPress={() => authByPhone.setShowMessage(undefined)}
         >
           <Text
             style={{
