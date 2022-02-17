@@ -1,9 +1,10 @@
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import {StyleSheet, View } from "react-native";
 import Constants from "expo-constants";
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const SafeScreen = ({ children, style }) => {
   return (
-    <SafeAreaView style={[styles.screen, style]}>
+    <SafeAreaView style={[styles.screen, style]} edges={["top", "bottom"]}>
       <View style={[styles.view, style]}>{children}</View>
     </SafeAreaView>
   );
