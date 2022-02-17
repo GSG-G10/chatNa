@@ -1,79 +1,80 @@
-import React from "react";
-import {
-  Text,
-  View,
-  TextInput,
-  Button,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+// import { useState } from "react";
+import { StyleSheet } from "react-native";
 import {
   FirebaseRecaptchaVerifierModal,
   FirebaseRecaptchaBanner,
 } from "expo-firebase-recaptcha";
+
+import { SafeScreen } from "../components/SafeScreen";
+import { AppForm, AppFormField, SubmitButton } from "../components/forms";
+import loginSchema from "../schema/loginSchema";
+
+import { AppImage } from "../components/AppImage";
 import useFirebase from "../hooks/useFirebase";
 import { app } from "../../firebase/firebase";
-export default function LoginScreen() {
+import colors from "../config/colors";
 
-  const { options } = app;
+export default function LoginScreen() {
+  // const [hideRecaptcha, setHideRecaptcha] = useState(true);
   const attemptInvisibleVerification = false;
+  const { options } = app;
   const authByPhone = useFirebase();
 
+  const handleSubmit = async () => {
+    await authByPhone.verify();
+    // if (authByPhone.verificationId) {
+    //   // move to verification code form
+    // }
+  };
+
+  const setPhone = (phoneNumber) => {
+    authByPhone.setPhoneNumber(phoneNumber);
+  };
+
   return (
-    <View style={{ padding: 20, marginTop: 50 }}>
+    <SafeScreen style={styles.container}>
       <FirebaseRecaptchaVerifierModal
+        title="prove you are human!"
+        cancelLabel="Close!"
         ref={authByPhone.recaptchaVerifier}
         firebaseConfig={options}
-        // attemptInvisibleVerification
+        // attemptInvisibleVerification={hideRecaptcha}
       />
-      <Text style={{ marginTop: 20 }}>Enter phone number</Text>
-      <TextInput
-        style={{ marginVertical: 10, fontSize: 17 }}
-        placeholder="+1 999 999 9999"
-        autoFocus
-        autoCompleteType="tel"
-        keyboardType="phone-pad"
-        textContentType="telephoneNumber"
-        onChangeText={(phoneNumber) => authByPhone.setPhoneNumber(phoneNumber)}
+      <AppImage
+        imagePath={require("../assets/logo.png")}
+        imageStyle={styles.logo}
       />
-      <Button
-        title="Send Verification Code"
-        disabled={!authByPhone.phoneNumber}
-        onPress={authByPhone.verify}
-      />
-      <Text style={{ marginTop: 20 }}>Enter Verification code</Text>
-      <TextInput
-        style={{ marginVertical: 10, fontSize: 17 }}
-        editable={!!authByPhone.verificationId}
-        placeholder="123456"
-        onChangeText={authByPhone.setVerificationCode}
-      />
-      <Button
-        title="Confirm Verification Code"
-        disabled={!authByPhone.verificationId}
-        onPress={authByPhone.confirmVerification}
-      />
-      {authByPhone.message ? (
-        <TouchableOpacity
-          style={[
-            StyleSheet.absoluteFill,
-            { backgroundColor: 0xffffffee, justifyContent: "center" },
-          ]}
-          onPress={() => authByPhone.setShowMessage(undefined)}
-        >
-          <Text
-            style={{
-              color: authByPhone.message.color || "blue",
-              fontSize: 17,
-              textAlign: "center",
-              margin: 20,
-            }}
-          >
-            {authByPhone.message.text}
-          </Text>
-        </TouchableOpacity>
-      ) : undefined}
-      {attemptInvisibleVerification && <FirebaseRecaptchaBanner />}
-    </View>
+      <AppForm
+        initialValues={{ phoneNumber: "" }}
+        validationSchema={loginSchema}
+        onSubmit={handleSubmit}
+      >
+        <AppFormField
+          name="phoneNumber"
+          placeholder="+1 999 999 9999"
+          iconName="cellphone-android"
+          keyboardType="phone-pad"
+          autoCompleteType="tel"
+          textContentType="telephoneNumber"
+          nextFunc={setPhone}
+        />
+        <SubmitButton title="Send Verification Code" />
+      </AppForm>
+    </SafeScreen>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: colors.white,
+  },
+  logo: {
+    width: 85,
+    height: 85,
+    marginTop: 50,
+    marginBottom: 20,
+    alignSelf: "center",
+  },
+});
