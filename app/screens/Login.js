@@ -11,6 +11,7 @@ import {
   FirebaseRecaptchaVerifierModal,
   FirebaseRecaptchaBanner,
 } from "expo-firebase-recaptcha";
+
 import useFirebase from "../hooks/useFirebase";
 import { app } from "../../firebase/firebase";
 export default function LoginScreen() {
@@ -24,7 +25,6 @@ export default function LoginScreen() {
       <FirebaseRecaptchaVerifierModal
         ref={authByPhone.recaptchaVerifier}
         firebaseConfig={options}
-        // attemptInvisibleVerification
       />
       <Text style={{ marginTop: 20 }}>Enter phone number</Text>
       <TextInput
