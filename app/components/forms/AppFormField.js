@@ -3,14 +3,21 @@ import { useFormikContext } from "formik";
 import { AppTextInput } from "../AppTextInput";
 import { ErrorMessage } from "./ErrorMessage";
 
-export const AppFormField = ({ name, width, ...otherProps }) => {
+export const AppFormField = ({ name, width, nextFunc, ...otherProps }) => {
   const { setFieldTouched, values, setFieldValue, touched, errors } =
     useFormikContext();
+
+    const checkErrorsBeforeInvoke = (text) => {
+      setFieldValue(name, text);
+      if (!errors[name]) {
+        nextFunc(text) 
+      }
+    }
   return (
     <>
       <AppTextInput
         onBlur={() => setFieldTouched(name)}
-        onChangeText={(text) => setFieldValue(name, text)}
+        onChangeText={(text) => checkErrorsBeforeInvoke(text)}
         width={width}
         value={values[name]}
         {...otherProps}
