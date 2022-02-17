@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { PhoneAuthProvider, signInWithCredential } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
+import colors from "../config/colors";
 
 const useFirebase = () => {
   const [phoneNumber, setPhoneNumber] = useState();
@@ -18,7 +19,7 @@ const useFirebase = () => {
       await signInWithCredential(auth, credential);
       setShowMessage({ text: "Phone authentication successful 👍" });
     } catch (err) {
-      setShowMessage({ text: `Error: ${err.message}`, color: "red" });
+      setShowMessage({ text: `Error: ${err.message}`, color: colors.danger });
     }
   };
 
@@ -34,7 +35,7 @@ const useFirebase = () => {
         text: "Verification code has been sent to your phone.",
       });
     } catch (err) {
-      setShowMessage({ text: `Error: ${err.message}`, color: "red" });
+      setShowMessage({ text: `Error: ${err.message}`, color:colors.danger });
     }
   };
 

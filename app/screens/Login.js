@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from "react-native";
 import {
   FirebaseRecaptchaVerifierModal,
@@ -32,7 +32,7 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeScreen style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FirebaseRecaptchaVerifierModal
         title="prove you are human!"
         cancelLabel="Close!"
@@ -60,7 +60,7 @@ export default function LoginScreen() {
         />
         <SubmitButton title="Send Verification Code" />
       </AppForm>
-    </SafeScreen>
+    </SafeAreaView>
   );
 }
 
