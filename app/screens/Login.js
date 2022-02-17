@@ -26,6 +26,7 @@ export default function LoginScreen() {
         ref={authByPhone.recaptchaVerifier}
         firebaseConfig={options}
       />
+      
       <Text style={{ marginTop: 20 }}>Enter phone number</Text>
       <TextInput
         style={{ marginVertical: 10, fontSize: 17 }}
