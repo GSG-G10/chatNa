@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 export default verificationSchema = Yup.object().shape({
-  verificationCode: Yup.string()
+  codeVerification: Yup.string()
     .required()
     .length(6)
     .label("Verification Code"),

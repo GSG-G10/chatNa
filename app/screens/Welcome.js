@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { View, ImageBackground, StyleSheet, Animated } from "react-native";
 
-import colors from "../config/colors";
-
 import { AppButton } from "../components/AppButton";
 import { AppImage } from "../components/AppImage";
 import { AppText } from "../components/AppText";
+import routes from '../components/routes/routes';
+import colors from "../config/colors";
 
 const Welcome = ({ navigation }) => {
 
@@ -24,8 +24,6 @@ const Welcome = ({ navigation }) => {
         useNativeDriver: true,
       }).start();
     };
-
-
 
   return (
     <ImageBackground
@@ -85,6 +83,7 @@ const styles = StyleSheet.create({
 
   loginButton: {
     backgroundColor: colors.primary,
+    marginBottom:50
   },
   tagLine: {
     fontSize: 30,
