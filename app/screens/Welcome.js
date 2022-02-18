@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
 
   loginButton: {
     backgroundColor: colors.primary,
-    marginBottom:50
+    marginBottom:50,
   },
   tagLine: {
     fontSize: 30,
