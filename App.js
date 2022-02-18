@@ -1,13 +1,15 @@
+import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
+import navigationTheme from "./app/components/routes/navigationTheme";
 import colors from './app/config/colors';
-// import LoginScreen from './app/screens/Login'; 
-import VerificationScreen from './app/screens/Verification';
-
+import { AuthNavigator } from "./app/components/routes/authNavigator";
 export default function App() {
   return (
     <View style={styles.container}>
-      <VerificationScreen />
+      <NavigationContainer theme={navigationTheme}>
+         <AuthNavigator />
+        </NavigationContainer>
       <StatusBar style="auto" />
     </View>
   );
