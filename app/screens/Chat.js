@@ -5,7 +5,6 @@ import { SafeScreen } from "../components/SafeScreen";
 import { AppText } from "../components/AppText";
 import colors from "../config/colors";
 function ChatScreen(props) {
-
   return (
     <SafeScreen style={styles.container}>
       <AppText styles={styles.text}> Hi Chat </AppText>
@@ -14,13 +13,13 @@ function ChatScreen(props) {
 }
 
 const styles = StyleSheet.create({
-  container:{
-    backgroundColor:'#000',
-    flex:1,
+  container: {
+    backgroundColor: colors.primary,
+    flex: 1,
   },
-  text:{
-    color:"#fff"
-  }
+  text: {
+    color: colors.white,
+  },
 });
 
 export default ChatScreen;

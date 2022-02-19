@@ -29,8 +29,8 @@ const useFirebase = () => {
       const verificationId = await phoneProvider.verifyPhoneNumber(
         phoneNumber,
         recaptchaVerifier.current
-      );
-      setVerificationId(verificationId);
+        );
+        setVerificationId(verificationId);
       setShowMessage({
         text: "Verification code has been sent to your phone.",
       });
