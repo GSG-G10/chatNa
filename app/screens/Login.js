@@ -9,8 +9,8 @@ import {
   AppForm,
   AppFormField,
   SubmitButton,
-  VerificationForm,
 } from "../components/forms";
+import VerificationForm from '../components/VerificationForm'
 import loginSchema from "../schema/loginSchema";
 import { AppImage } from "../components/AppImage";
 import useFirebase from "../hooks/useFirebase";

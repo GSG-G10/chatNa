@@ -1,8 +1,8 @@
 import React from "react";
-import verificationSchema from "../../schema/verificationCodeSchema";
-import { AppForm, AppFormField, SubmitButton } from "./";
-import useFirebase from "../../hooks/useFirebase";
-import routes from "../routes/routes";
+import verificationSchema from "../schema/verificationCodeSchema";
+import { AppForm, AppFormField, SubmitButton } from "./forms";
+import useFirebase from "../hooks/useFirebase";
+import routes from "./routes/routes";
 
 export default function VerificationForm({ navigation }) {
   const authByPhone = useFirebase();
