@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const SafeScreen = ({ children, style }) => {
   return (
-    <SafeAreaView style={style} edges={["top", "bottom"]}>
+    <SafeAreaView style={[ styles.view, style]} edges={["top", "bottom"]}>
       <View style={[styles.view, style]}>{children}</View>
     </SafeAreaView>
   );
