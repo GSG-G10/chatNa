@@ -9,9 +9,7 @@ export const AppFormField = ({ name, width, nextFunc, ...otherProps }) => {
 
     const checkErrorsBeforeInvoke = (text) => {
       setFieldValue(name, text);
-      if (!errors[name]) {
         nextFunc(text) 
-      }
     }
   return (
     <>

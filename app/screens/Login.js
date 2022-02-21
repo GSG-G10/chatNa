@@ -5,13 +5,10 @@ import {
 } from "expo-firebase-recaptcha";
 
 import { SafeScreen } from "../components/SafeScreen";
-import {
-  AppForm,
-  AppFormField,
-  SubmitButton,
-} from "../components/forms";
-import VerificationForm from '../components/VerificationForm'
+import { AppForm, AppFormField, SubmitButton } from "../components/forms";
+
 import loginSchema from "../schema/loginSchema";
+import verificationSchema from "../schema/verificationCodeSchema";
 import { AppImage } from "../components/AppImage";
 import useFirebase from "../hooks/useFirebase";
 import { app } from "../../firebase/firebase";
@@ -31,6 +28,14 @@ export default function LoginScreen({ navigation }) {
     authByPhone.setPhoneNumber(phoneNumber);
   };
 
+  const handleVerification = async () => {
+    await authByPhone.confirmVerification();
+  };
+
+  const setCodeVerification = (code) => {
+    console.log(code);
+    authByPhone.setVerificationCode(code);
+  };
   return (
     <SafeScreen style={styles.container}>
       <FirebaseRecaptchaVerifierModal
@@ -45,7 +50,21 @@ export default function LoginScreen({ navigation }) {
         imageStyle={styles.logo}
       />
       {authByPhone.verificationId ? (
-        <VerificationForm navigation={navigation} />
+        <AppForm
+          initialValues={{ codeVerification: "" }}
+          validationSchema={verificationSchema}
+          onSubmit={handleVerification}
+        >
+          <AppFormField
+            name="codeVerification"
+            placeholder="Verification Code "
+            iconName="message-cog-outline"
+            keyboardType="phone-pad"
+            autoCompleteType="tel"
+            nextFunc={setCodeVerification}
+          />
+          <SubmitButton title="Verify " />
+        </AppForm>
       ) : (
         <AppForm
           initialValues={{ phoneNumber: "" }}
